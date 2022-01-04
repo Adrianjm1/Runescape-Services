@@ -2,12 +2,20 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import './hero.css';
 
+
+
+
+
+
 const Hero = () => {
+
+
+    
     return (
         <>
             <div className='containerHero'>
-                <div class="hero-image">
-                    <div class="hero-text">
+                <div className="hero-image">
+                    <div className="hero-text">
                         <br/><br/><br/>
                         <h1>Runescape services</h1>
                         <br/><br/>

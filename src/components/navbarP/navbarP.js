@@ -10,11 +10,11 @@ const NavbarP = () => {
     <Navbar.Brand href="#home">Runescape Services</Navbar.Brand>
     <Nav className="me-auto">
       <Nav.Link href="#home">Home</Nav.Link>
-      <Nav.Link href="#features">Skilling</Nav.Link>
-      <Nav.Link href="#pricing">Questing</Nav.Link>
-      <Nav.Link href="#pricing">Minigames & other</Nav.Link>
-      <Nav.Link href="#pricing">RS3 Services</Nav.Link>
-      <Nav.Link href="#pricing">OSRS Highscores</Nav.Link>
+      <Nav.Link href="#skilling">Skilling</Nav.Link>
+      <Nav.Link href="#questing">Questing</Nav.Link>
+      <Nav.Link href="#Minigames">Minigames & other</Nav.Link>
+      <Nav.Link href="#Services">RS3 Services</Nav.Link>
+      <Nav.Link href="#Highscores">OSRS Highscores</Nav.Link>
     </Nav>
     </Container>
   </Navbar>
