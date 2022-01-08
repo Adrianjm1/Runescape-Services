@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Button, Container, InputGroup, FormControl } from 'react-bootstrap';
+import { Card, Button, Container, InputGroup, FormControl, Row, Col } from 'react-bootstrap';
 import axios from "../../config/axios";
 import NavbarP from '../navbarP/navbarP';
 import './skill.css'
-
+import Skillcalculator from './Skillcalculator';
 
 const defaultState = {
     skills: [],
-    rsn: '',
+    rsn: '-',
     enterRsn: 0
 
 };
@@ -23,17 +23,10 @@ const Skill = () => {
     useEffect(function () {
 
 
+
         axios.get(`/skills/${state.rsn}`)
             .then((res) => {
                 if (res) {
-
-
-
-
-                    console.log(res.data);
-
-
-                    let arrayNames = ['attack', 'agility', 'ranged'];
 
 
 
@@ -45,11 +38,11 @@ const Skill = () => {
 
                 }
 
-
-
-
             })
             .catch((error) => console.log(error))
+
+
+
 
 
 
@@ -73,11 +66,11 @@ const Skill = () => {
 
     const onEnterRsn = () => {
 
-            let aux = state.enterRsn;
-            let vali = aux +1;
-            console.log(vali);
+        let aux = state.enterRsn;
+        let vali = aux + 1;
+        console.log(vali);
 
-            setState({ ...state, enterRsn:vali })
+        setState({ ...state, enterRsn: vali })
 
 
 
@@ -100,38 +93,41 @@ const Skill = () => {
                     placeholder="Username"
                     aria-label="Username"
                     aria-describedby="basic-addon1"
-                    name="rsn" 
+                    name="rsn"
                     onChange={onInputChange}
                 />
             </InputGroup>
-            <Button className='primary' onClick={onEnterRsn}> Hola </Button>
+            <Button className='primary' onClick={onEnterRsn}> Buscar </Button>
 
-            <div className='cards-skill'>
+
+            <div className='cards-skill mx-auto'>
 
                 {state.skills.map((datos) => {
 
                     if (datos[0] == 'overall') {
-                        
+
                     } else {
 
                         let image = require(`../../assets/img/${datos[0]}.png`)
                         return (
-                            <Card className='card-skill' key={datos[0]} style={{ width: '10rem', height: '15rem' }}>
 
-                                <Card.Body>
-                                    <Card.Title className='text-center'>{UpperCase(datos[0])}</Card.Title>
-                                    <Card.Text className='text-center card-skill'>
-                                        ({datos[1].level})
-                                    </Card.Text>
-                                    <Card.Img className='img-thumbnail' style={{ height: '50%' }} variant="bottom" src={image} />
-                                </Card.Body>
-                            </Card>
+                            <div key={datos[1].rank} className='divFa'>
+                                <div className='lacard mr-40 '>
+                                    <div className='infoskills'>
+                                        <div className='divImgCard'>       <img className='imgcard' src={image} />             </div>
+                                        <div>       <a className='textocarta'> {UpperCase(datos[0])}   ({datos[1].level}) </a>        </div>
+                                    </div>
+                                </div>
+                            </div>
                         )
                     }
                 })
                 }
 
             </div>
+
+
+            <Skillcalculator/>
 
 
         </>
