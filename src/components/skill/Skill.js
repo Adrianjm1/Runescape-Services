@@ -8,15 +8,24 @@ import Skillcalculator from './Skillcalculator';
 const defaultState = {
     skills: [],
     rsn: '-',
-    enterRsn: 0
+    enterRsn: 0,
+
 
 };
+
+const skillState = {
+    lvl: 0,
+    skill:'',
+    xp: 0
+
+}
 
 
 
 const Skill = () => {
 
 
+    const [skilldata, setSkilldata] = useState(skillState);
 
     const [state, setState] = useState(defaultState);
 
@@ -83,10 +92,15 @@ const Skill = () => {
 
     }
 
+    const setSkill = (select) => {
+
+        setSkilldata({ ...skilldata, skill: select[0] })
+    }
+
     return (
         <>
             <NavbarP />
-
+            {/* 
             <InputGroup className="mb-3">
                 <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
                 <FormControl
@@ -97,7 +111,21 @@ const Skill = () => {
                     onChange={onInputChange}
                 />
             </InputGroup>
-            <Button className='primary' onClick={onEnterRsn}> Buscar </Button>
+            <Button className='primary' onClick={onEnterRsn}> Buscar </Button> */}
+            <br />
+            <div className="container-input">
+                <div className="container__item">
+                    <form className="form">
+
+                        <input type="text" className="form__field" name="rsn"
+                            onChange={onInputChange} placeholder="Yout RSN" />
+                        <button type="button" onClick={onEnterRsn} className="btn btn--primary btn--inside uppercase">Search</button>
+                    </form>
+                </div>
+
+            </div>
+
+            <br />
 
 
             <div className='cards-skill mx-auto'>
@@ -112,10 +140,10 @@ const Skill = () => {
                         return (
 
                             <div key={datos[1].rank} className='divFa'>
-                                <div className='lacard mr-40 '>
+                                <div onClick={() => setSkill(datos)} className='lacard mr-40 '>
                                     <div className='infoskills'>
                                         <div className='divImgCard'>       <img className='imgcard' src={image} />             </div>
-                                        <div>       <a className='textocarta'> {UpperCase(datos[0])}   ({datos[1].level}) </a>        </div>
+                                        <div className='divTextCard' >       <a className='textocarta'> {UpperCase(datos[0])}   ({datos[1].level}) </a>        </div>
                                     </div>
                                 </div>
                             </div>
@@ -126,8 +154,12 @@ const Skill = () => {
 
             </div>
 
+            {console.log(skilldata.skill)}
 
-            <Skillcalculator/>
+
+
+
+            <Skillcalculator skillSelected={skilldata.skill} />
 
 
         </>
