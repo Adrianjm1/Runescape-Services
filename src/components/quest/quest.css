@@ -1,0 +1,19 @@
+.quests-cards {
+
+    width: 80%;
+    display: grid;
+    
+    grid-template-columns: repeat(auto-fill, 200px) ;
+ 
+     
+
+}
+
+.questCard {
+
+    margin: 10px;
+    cursor: pointer;
+
+}
+     
+     

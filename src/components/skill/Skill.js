@@ -37,6 +37,8 @@ const Skill = () => {
             .then((res) => {
                 if (res) {
 
+        
+
 
 
 
@@ -94,7 +96,8 @@ const Skill = () => {
 
     const setSkill = (select) => {
 
-        setSkilldata({ ...skilldata, skill: select[0] })
+
+        setSkilldata({ ...skilldata, skill: select })
     }
 
     return (
@@ -154,12 +157,12 @@ const Skill = () => {
 
             </div>
 
-            {console.log(skilldata.skill)}
+            {/* {console.log(skilldata)} */}
 
 
 
 
-            <Skillcalculator skillSelected={skilldata.skill} />
+            <Skillcalculator skillSelected={skilldata} />
 
 
         </>
@@ -167,3 +170,5 @@ const Skill = () => {
 }
 
 export default Skill
+
+
