@@ -159,10 +159,13 @@ const Skill = () => {
 
             {/* {console.log(skilldata)} */}
 
+            <Row>
+    <Col>            <Skillcalculator skillSelected={skilldata} /></Col>
+    <Col>2 of 2</Col>
+  </Row>
 
 
 
-            <Skillcalculator skillSelected={skilldata} />
 
 
         </>
