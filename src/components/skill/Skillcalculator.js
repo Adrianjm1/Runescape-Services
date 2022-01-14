@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Button, Container, InputGroup, FormControl, Row, Col, Form } from 'react-bootstrap';
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom';
+import {connect} from 'react-redux';
+import store from '../../redux/store'
+import { useDispatch } from "react-redux";
+import { remove, add_skill } from '../../redux/actions/SkillShop';
 import axios from "../../config/axios";
 import NavbarP from '../navbarP/navbarP';
 import './skillcalculator.css';
@@ -17,7 +21,7 @@ const countState = {
 const defaultState = {
     skillTarget: 0,
     seleccionada: 'standar',
-    lvl: 10,
+    lvl: 1,
     xp: 1
 
 }
@@ -26,7 +30,10 @@ const Skillcalculator = (skillSelected) => {
 
     const [state, setState] = useState(defaultState)
     const [countCurrent, setCountCurrent] = useState(0);
-    const [countTarget, setCountTarget] = useState();
+    const [countTarget, setCountTarget] = useState(0);
+    const dispatch = useDispatch();
+    // var newState =store.getState().skill_shop.skill;
+    // console.log(newState);
 
     if (skillSelected.skillSelected.skill == '') {
         skillSelected.skillSelected.skill = 'standar'
@@ -43,8 +50,8 @@ const Skillcalculator = (skillSelected) => {
 
 
         let image;
-        let xp;
-        let lvl;
+        let xp=0;
+        let lvl=0;
 
 
         const skillSelectede = skillSelected.skillSelected.skill[0];
@@ -55,14 +62,18 @@ const Skillcalculator = (skillSelected) => {
         if (skillSelectede != '' && skillSelectede != undefined && skillSelectede != 's') {
 
             image = require(`../../assets/img/${skillSelectede}.png`)
-            xp = skillSelected.skillSelected.skill[1].xp
-            lvl = skillSelected.skillSelected.skill[1].level
+
+            if ( isNaN(skillSelected.skillSelected.skill[1].level) ){
+
+                // console.log(isNaN(skillSelected.skillSelected.skill[1].level));
+            } else {
+
+                xp = skillSelected.skillSelected.skill[1].xp
+                lvl = skillSelected.skillSelected.skill[1].level
+
+            }
 
         }
-
-
-        let elementXP = <span id='putXP'> {xp}</span>
-        let elementLVL = <span id='putXP'> {lvl}</span>
 
         let element = <img className='mx-auto d-block' src={image} id='putskill' />
 
@@ -77,24 +88,6 @@ const Skillcalculator = (skillSelected) => {
 
         ReactDOM.render(element, document.getElementById('putskill'));
 
-        // axios.get('/seller/')
-        // .then((res) => {
-
-        //     axios.get('/bill/')
-        //         .then((resp) => {
-
-        //                 setState({
-        //                     ...state,
-        //                     sellers: res.data,
-        //                     bills: resp.data,
-        //                 })
-
-        //         })
-        //         .catch((error) => console.log(error))
-
-
-        // })
-        // .catch((error) => console.log(error))
 
 
 
@@ -242,13 +235,16 @@ const Skillcalculator = (skillSelected) => {
                 </Col>
                 <Col sm>
                     <p className='priceSkill'>Total Price    <br />  <span id='putLVL' > {state.lvl} </span> </p>
+                    <p className='priceSkill'>cantidad   <br />  <span id='putLVL' > {store.getState().skill_shop.skill} </span> </p>
+
                 </Col>
             </Row>
 
 
-            <div className='btnAdd' >
-                <span className='btnAddSpan'><a href="#"></a></span>
-            </div>
+            <button onClick={()=>( dispatch (add_skill(1)))}>Agregar</button>
+            <button onClick={()=>( dispatch (remove(1)))}>remover</button>
+
+    
 
 
 
@@ -259,4 +255,18 @@ const Skillcalculator = (skillSelected) => {
 
 }
 
-export default Skillcalculator
+
+const mapDispatch = {
+    add_skill,
+    remove
+}
+
+const mapStateToProps = (state)=>{
+
+    return {
+        skill_shop: state.game_shop
+    }
+
+}
+
+export default  connect(mapStateToProps, mapDispatch)(Skillcalculator);

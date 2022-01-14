@@ -8,13 +8,13 @@ const skill_shop = (state = defaultSkill, action)=>{
     switch (action.type) {
         case ADD_SKILL: {
             return {
-                ...state, skill: state.skill - action.payload
+                ...state, skill: state.skill + action.payload
             }
         }
 
         case REMOVE_SKILL: {
             return {
-                ...state, skill: state.skill + action.payload
+                ...state, skill: state.skill - action.payload
             }
         }
             
