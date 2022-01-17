@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Button, Container, InputGroup, FormControl, Row, Col } from 'react-bootstrap';
 import axios from "../../config/axios";
+import Cart from '../cart/Cart';
 import NavbarP from '../navbarP/navbarP';
+
 import './skill.css'
 import Skillcalculator from './Skillcalculator';
 
@@ -161,7 +163,7 @@ const Skill = () => {
 
             <Row>
     <Col>            <Skillcalculator skillSelected={skilldata} /></Col>
-    <Col>2 of 2</Col>
+    <Col><Cart/></Col>
   </Row>
 
 

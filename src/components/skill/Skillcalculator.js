@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Button, Container, InputGroup, FormControl, Row, Col, Form } from 'react-bootstrap';
 import ReactDOM from 'react-dom';
-import {connect} from 'react-redux';
+import {connect, useSelector} from 'react-redux';
 import store from '../../redux/store'
 import { useDispatch } from "react-redux";
 import { remove, add_skill } from '../../redux/actions/SkillShop';
@@ -32,6 +32,8 @@ const Skillcalculator = (skillSelected) => {
     const [countCurrent, setCountCurrent] = useState(0);
     const [countTarget, setCountTarget] = useState(0);
     const dispatch = useDispatch();
+    const nivel_skill = useSelector(Sstate => Sstate.skill_shop)
+    
     // var newState =store.getState().skill_shop.skill;
     // console.log(newState);
 
@@ -146,7 +148,6 @@ const Skillcalculator = (skillSelected) => {
 
     const onInputChange = e => {
 
-        // document.getElementById("skillTarget").value =countTarget + parseInt(e.target.value) ;  
         const isValid = e.target.validity.valid;
 
         if (e.target.value >= 100) {
@@ -161,7 +162,7 @@ const Skillcalculator = (skillSelected) => {
             setCountCurrent(parseInt(e.target.value))
             document.getElementById("current-skill").value = parseInt(e.target.value)
 
-            // setState({ ...state, [e.target.name]: e.target.value });
+    
         }
     }
 
@@ -186,11 +187,6 @@ const Skillcalculator = (skillSelected) => {
 
         }
     }
-
-
-
-
-
 
 
     return (
@@ -235,14 +231,14 @@ const Skillcalculator = (skillSelected) => {
                 </Col>
                 <Col sm>
                     <p className='priceSkill'>Total Price    <br />  <span id='putLVL' > {state.lvl} </span> </p>
-                    <p className='priceSkill'>cantidad   <br />  <span id='putLVL' > {store.getState().skill_shop.skill} </span> </p>
+                    {/* <p className='priceSkill'>cantidad   <br />  <span id='putLVL' > {nivel_skill.skill} </span> </p> */}
 
                 </Col>
             </Row>
 
 
-            <button onClick={()=>( dispatch (add_skill(1)))}>Agregar</button>
-            <button onClick={()=>( dispatch (remove(1)))}>remover</button>
+            {/* <button onClick={()=>( dispatch (add_skill(1)))}>Agregar</button>
+            <button onClick={()=>( dispatch (remove(1)))}>remover</button> */}
 
     
 
